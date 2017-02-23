@@ -43,9 +43,11 @@ def main():
     print("X: %s" % X)
     print("Y: %s" % Y)
     print("Z: %s (%d elements)" % (Z, len(Z)))
+    print("xx: %s" % xx)
+    print("yy: %s" % yy)
 
     # Plot the surface.
-    surf = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm,
+    surf = ax.plot_surface(xx, yy, Z, cmap=cm.coolwarm,
                                    linewidth=0, antialiased=True)
 
     # Customize the z axis.
@@ -56,6 +58,12 @@ def main():
     # Add a color bar which maps values to colors.
     fig.colorbar(surf, shrink=0.5, aspect=5)
 
+    ax.text(-60.60, -42.50, 0, "X-tower", color='red')
+    ax.text(60.60, -42.50, 0, "Y-tower", color='red')
+    ax.text(0, 67, 0, "Z-tower", color='red')
+    ax.set_xlabel('X axis')
+    ax.set_ylabel('Y axis')
+    ax.set_zlabel('Z axis')
     plt.show()
 
 if __name__ == "__main__":
