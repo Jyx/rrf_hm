@@ -6,14 +6,29 @@ from matplotlib import cm
 from matplotlib.ticker import LinearLocator, FormatStrFormatter
 import numpy as np
 import csv
+import sys
+import getopt
 
-def main():
+def main(argv):
     print("Generate heightmap")
     fig = plt.figure()
     ax = fig.gca(projection='3d')
 
+    filename = "heightmap.csv"
+    try:
+        opts, args = getopt.getopt(argv,"hi:",["ifile="])
+    except getopt.GetoptError:
+        print('test.py -i <inputfile>')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print('test.py -i <inputfile>')
+            sys.exit()
+        elif opt in ("-i", "--ifile"):
+            filename = arg
+
     # Make data.
-    with open("heightmap.csv") as f:
+    with open(filename) as f:
         hm = f.readlines()
     hm = [x.strip() for x in hm]
 
@@ -67,4 +82,4 @@ def main():
     plt.show()
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
